@@ -5,7 +5,8 @@ services:
     image: mysql:latest
     container_name: mysql_laravel_enviroment
     environment:
-      MYSQL_ROOT_PASSWORD: 123456
+      # MYSQL_ROOT_PASSWORD: 
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
       MYSQL_DATABASE: tdl
     ports:
       - 3306:3306
