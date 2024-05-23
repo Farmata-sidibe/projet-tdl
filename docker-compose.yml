@@ -5,7 +5,7 @@ services:
     image: mysql:latest
     container_name: mysql_laravel_enviroment
     environment:
-      MYSQL_ROOT_PASSWORD: 
+      MYSQL_ROOT_PASSWORD: 123456
       MYSQL_DATABASE: tdl
     ports:
       - 3306:3306
@@ -14,9 +14,11 @@ services:
     restart: always
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      # test: ["CMD-SHELL", "mysqladmin ping -h localhost -u root --password= || exit 1"]
       interval: 30s
-      timeout: 15s
-      retries: 15
+      timeout: 30s
+      retries: 5
+      start_period: 90s
 
   tdl-api:
     build:
@@ -31,7 +33,7 @@ services:
     healthcheck:
       test: ["CMD-SHELL", "curl -f http://localhost:8080/health || exit 1"]
       interval: 30s
-      timeout: 10s
+      timeout: 30s
       retries: 5
       start_period: 30s
 
